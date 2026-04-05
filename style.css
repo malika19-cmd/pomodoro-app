@@ -1,0 +1,606 @@
+body { background: lightpink; font-family: Arial; text-align: center; color: white; margin: 0; padding: 0; 
+  overflow-y: auto;
+  transform: background 0.5s ease; }
+.background{
+    
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 15px;
+
+}
+.main-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-container{ 
+    background: rgba(225,225,225,0.2); 
+    padding: 35px; 
+    border-radius: 12px; border: none; width: 400px;text-align: center;margin-top: 30px;}
+    
+
+.tabs button { background: none;
+    border: none; color: white; margin: 5px; 
+    padding: 10px; border-radius: 5px; 
+    cursor: pointer; font-weight: bold; font-size: large;}
+.tabs button.active{
+    background-color: rgba(225,225,225,0.2);
+    color: white;
+}
+#timer { font-size: 100px; margin: 20px; font-weight: bold;}
+#startBtn { width: 60%;
+  padding: 16px;
+
+  font-size: 26px;
+  font-weight: bolder;
+
+  border: none;
+  border-radius: 10px;
+
+  color: #ba4949;
+
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#startBtn:active{
+  transform: scale(0.95);
+}
+
+.settings { background: none; border: none; font-size: 18px; cursor: pointer; display: flex;}
+.title{ font-size: 24px; font-weight: bold; color: white; text-align: center;}
+.topbar { 
+  height: 60px;
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+
+  border-bottom: 2px solid #ddd;  /* 🔥 horizontal line */
+
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1000;}
+#settingsBtn{
+  background:  rgba(225,225,225,0.2); font-size: 20px; cursor: pointer; padding: 4px 8px; color: white; border: none; border-radius: 5px;
+}
+.settings-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* center horizontally */
+}
+
+#saveSettings {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #d6d6d6;
+  cursor: pointer;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Show arrows on hover */
+input[type="number"]:hover::-webkit-inner-spin-button,
+input[type="number"]:hover::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield; /* hide arrows in Firefox */
+}
+
+/* Optional: show arrows in Firefox on hover using this trick */
+input[type="number"]:hover { -moz-appearance: number-input;}
+
+/* Styling the input box nicely */
+input[type="number"] {
+  width: 60px;
+  text-align: left;
+  padding: 5px;
+  font-size: 16px;
+}
+.setting-item {
+  margin-top: 18px;     /* 🔥 proper spacing */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.interval-input{
+  display: flex;
+  align-items: center;
+}
+.interval-input .arrows{
+  display: none;
+}
+
+.interval-input input{
+  width: 50px;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  
+}
+.modal {
+  position: fixed;
+  top: 50%;                 /* Center vertically */
+  left: 50%;                /* Center horizontally */
+  transform: translate(-50%, -50%); /* Perfect center */
+  background: rgba(0,0,0,0.3); /* Optional overlay effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content {
+  background: white;
+  color: #333;
+  padding: 15px 20px;
+  border-radius: 12px;
+  width: 380px;
+  text-align: center;
+  position: relative;/* Important for close button */
+  overflow: hidden;
+  max-height: 80vh;
+  font-size: 15px;
+  animation: scaleIn 0.3 ease;
+  
+}
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.modal-content h2{ font-size: 24px; margin-bottom: 5px;}
+.modal-content h3 { font-size: 20px; margin-top: 15px; font-weight: bold;}
+
+.modal-content input{
+  padding: 10px;
+  margin-top: 12px;
+  border-radius: 6px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.time-row div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.time-row label{
+  font-size: 14px;
+  margin-top: 14px;
+}
+
+.time-row input {
+  width: 70px;          /* 🔥 small box */
+  padding: 6px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  z-index: 1010;
+}
+
+
+input { display: block; margin: 10px auto; padding: 8px; font-size: 14px; }
+body.pomodoro{ background: #ba4949;}
+body.shortBreak{ background: #38858a;}
+body.longBreak{ background: #397097}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 30px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ddd;
+  border-radius: 36px;
+  top: 0; left: 0; right: 0; bottom: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(28px);
+}
+
+
+#addTaskBtn {
+  margin: 10px;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  border: dashed;
+  cursor: pointer;
+  background: rgba(225,225,225,0.2);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+
+
+.task-title {
+  font-size: 22px;
+  font-weight: bold;
+  width: 400px;
+  text-align: left; ;
+}
+
+.task-divider {
+  width: 400px;
+  height: 2px;
+  background: white;
+  margin-bottom: 20px;
+}
+
+.task-form {
+  max-width: 400px;
+  width: 100%;
+  background: white;
+  color: black;
+
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* INPUT TITLE */
+.task-input-title {
+  width: 100%;
+  font-size: 20px;     /* 🔥 bigger */
+  padding: 12px 8px;
+
+  border: none;
+  border-bottom: 2px solid #eee;
+  outline: none;
+}
+
+/* LABEL */
+.est-label {
+  margin-top: 15px;
+  font-size: 14px;
+  color: gray;
+  text-align: left;
+  margin: 8px 0 3px;
+}
+
+/* POMODORO INPUT */
+.pomodoro-input {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  gap: 5px;
+}
+
+.pomodoro-input input {
+  width: 55px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f2f2f2;
+  font-size: 16px;
+  text-align: left;
+}
+
+/* ARROWS */
+.arrows {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2px;
+}
+
+.arrows button {
+  padding: 5px 8px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* ADD NOTE */
+.add-note {
+  margin-top: 6px;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* NOTE BOX */
+#taskNote {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTONS */
+.task-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.right-actions{
+  display: flex;
+  gap: 10px;
+}
+.delete-btn{
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #333;
+}
+.delete-btn:hover{
+  color: gray;
+}
+
+.cancel-btn {
+  background: none;
+  border: none;
+  color: gray;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+/* TASK CARD (AFTER SAVE) */
+.task-card {
+  width: 400px;
+  background: white;
+  color: black;
+  padding: 15px;
+  margin-top: 12px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+  animation: fadeIn 0.3s ease;
+}
+.task-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* ACTIVE TASK BORDER */
+.task-card.active {
+  border-left: 5px solid black;
+}
+
+/* TEXT */
+.task-name {
+  font-weight: bold;
+}
+
+.task-count {
+  color: gray;
+}
+.task-wrapper{
+  width: 400px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.hidden{
+  display: none;
+}
+.task-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 13px;
+  color: gray;
+}
+
+.menu-btn {
+  cursor: pointer;
+  font-size: 18px;
+  color: gray;
+}
+
+.menu-btn:hover {
+  color: black;
+}
+
+@media (max-width: 600px) {
+
+/* ===== GLOBAL ===== */
+  body {
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow-x: hidden;
+  }
+
+  /* ===== MAIN CARD (LIKE POMOFOCUS) ===== */
+  .app-container {
+    width: 100%;
+    max-width: 360px;
+
+    margin: 15px auto;
+    padding: 20px;
+
+    border-radius: 12px;
+  }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .tabs button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  /* ===== TIMER (KEY FIX) ===== */
+  #timer {
+    font-size: 46px;   /* 🔥 controlled size */
+    margin: 20px 0;
+
+    text-align: center;
+    line-height: 1.5;
+
+    padding: 10px 10px;   /* small side space */
+  }
+
+  /* ===== START BUTTON ===== */
+  #startBtn {
+    width: 80%;
+    font-size: 20px;
+    padding: 12px;
+  }
+
+
+
+  /* ===== TASK SECTION ===== */
+  .task-wrapper {
+    width: 100%;
+    max-width: 360px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* TITLE + DIVIDER */
+  .task-title {
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .task-divider {
+    margin-left: auto;
+    width: 100%;
+    margin-right: auto;
+    max-width: 360px;
+  }
+
+  /* ADD TASK BUTTON */
+  #addTaskBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  /* TASK CARD */
+  .task-card {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+  }
+  .topbar{
+    margin-bottom: 20px;
+  }
+
+  /* TASK FORM */
+  .task-form {
+    width: 100%;
+    padding: 15px;
+  }
+
+  /* ===== MODAL (SETTINGS) ===== */
+  .modal-content {
+    width: 90%;
+    max-width: 320px;
+    margin: auto;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+}

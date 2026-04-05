@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer</title>
+</head>
+<body id="body" class="pomodoro">
+  <audio id="alarmSound" src="mixkit-digital-clock-digital-alarm-buzzer-992.wav"></audio>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <h1 class="title">Pomodoro</h1>
+    <button id="settingsBtn" onclick="openSettings()">⚙ Settings</button>
+  </div>
+
+  <div class="main-wrapper">
+    <!-- ===== TOP TABS ===== -->
+    <div class="background">
+      <div class="app-container">
+        <div class="tabs">
+          <button id="workBtn">Pomodoro</button>
+          <button id="shortBtn">Short Break</button>
+          <button id="longBtn">Long Break</button>
+        </div>
+      
+        <!-- ===== TIMER DISPLAY ===== -->
+        <div id="timer"><b>25:00</b></div>
+
+        <!-- ===== START / PAUSE BUTTON ===== -->
+        <button id="startBtn"><b>START</b></button>
+      </div>
+    </div>
+    <div class="task-wrapper">
+      <h3 class="task-title">Tasks</h3>
+      <div class="task-divider"></div>
+
+      <div id="taskList" class="task-list"></div>
+      <button id="addTaskBtn">+ Add Task</button>
+
+      <!-- TASK INPUT FORM -->
+      <div id="taskForm" class="task-form hidden">
+
+        <input type="text" id="taskNameInput" placeholder="What are you working on?"  class="task-input-title">
+
+        <h4 class="est-label">Est Pomodoros</h4>
+
+        <div class="pomodoro-input">
+          <input type="number" id="taskSessionsInput" value="0" min="0">
+
+            <div class="arrows">
+              <button onclick="increaseSession()">▲</button>
+              <button onclick="decreaseSession()">▼</button>
+            </div>
+        </div>
+
+        <div id="addNoteBtn" class="add-note"><u>+ Add Note</u></div>
+
+        <textarea id="taskNote" class="hidden" placeholder="Write your note..."></textarea>
+
+        <div class="task-actions">
+          <!-- LEFT: DELETE -->
+          <button id="deleteBtn" class="delete-btn hidden" onclick="deleteTask()">🗑</button>
+
+    <!-- RIGHT: CANCEL + SAVE -->
+          <div class="right-actions">
+            <button class="cancel-btn" onclick="cancelTask()">Cancel</button>
+            <button class="save-btn" onclick="saveTask()">Save</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <span onclick="closeSettings()" class="close">×</span>
+      <h2>Settings</h2>
+
+      <h3>Time (minutes)</h3>
+  <!-- Pomodoro -->
+      <div class="time-row">
+        <div>
+          <label for="pomodoroInput">Pomodoro</label>
+          <input id="pomodoroInput" type="number" value="25" min="1" max="60" step="1">
+        </div>
+
+<!-- Short Break -->
+        <div>
+          <label for="shortInput">Short Break</label>
+          <input id="shortInput" type="number" value="5" min="1" max="30" step="1">
+        </div>
+
+<!-- Long Break -->
+        <div>
+          <label for="longInput">Long Break</label>
+          <input id="longInput" type="number" value="15" min="1" max="60" step="1">
+        </div>
+      </div>
+
+
+      <hr>
+      <h3>Tasks</h3>
+      <div class="setting-item">
+        <span>Auto Start Break</span>
+        <label class="switch">
+          <input type="checkbox" id="autoBreak">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <span>Auto Start Pomodoro</span>
+        <label class="switch">
+          <input type="checkbox" id="autoPomodoro">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-item">
+        <span>Long Break Interval</span>
+
+        <div class="interval-input">
+          <input id="intervalInput" type="number" value="4" min="1">
+
+          <div class="arrows">
+            <button onclick="increaseInterval()">▲</button>
+            <button onclick="decreaseInterval()">▼</button>
+          </div>
+        </div>
+      </div>
+      <div class="settings-actions">
+        <button id="saveSettings">Save</button>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+</body>
+</html>
